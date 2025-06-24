@@ -70,9 +70,11 @@
 
 (defun simple-auto-compile--compile (file)
   "After loading FILE, native compile it if needed and return t on success."
-  (when (and (simple-auto-compile--should-compile-p file)
-             (ignore-errors (byte-compile-file file)))
-    (load (byte-compile-dest-file file) t t t)))
+  (when (simple-auto-compile--should-compile-p file)
+    (message "Auto-compiling %s..." file)
+    (unless (and (ignore-errors (byte-compile-file file))
+                 (load (byte-compile-dest-file file) t t t))
+      (message "Failed to compile & reload %s" file))))
 
 ;; NOTE: This uses advice instead of the after-load-functions hook so we can:
 ;; 1. Compile and reload before any "after load" stuff happens.
