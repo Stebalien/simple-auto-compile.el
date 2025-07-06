@@ -73,7 +73,7 @@
   (when (simple-auto-compile--should-compile-p file)
     (message "Auto-compiling %s..." file)
     (if (ignore-errors (byte-compile-file file))
-        (native--compile-async (byte-compile-dest-file file) nil 'late nil)
+        (native--compile-async file nil 'late nil)
       (message "Failed to compile %s" file))))
 
 ;; NOTE: This uses advice instead of the after-load-functions hook so we can:
