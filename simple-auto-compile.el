@@ -44,7 +44,7 @@
    ;; Ignore the init file for extra safety.
    early-init-file
    ;; ignore system directories, we can't put .elc files there anyways.
-   (rx bos (or "/usr/" "/opt/"))
+   (rx bos (or "/usr/" "/opt/" "/nix/"))
    ;; Ignore pkg/autoload files.
    (rx "-" (or "autoloads" "pkg") ".el" eos))
   "List of regular expressions for files to exclude from auto-compilation."
